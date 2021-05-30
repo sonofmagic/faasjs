@@ -6,7 +6,8 @@ describe('mysql', function () {
   it('with username', async function () {
     const sql = new Sql({
       name: 'sql',
-      adapterType: 'mysql'
+      adapterType: 'mysql',
+      config: { host: 'mysql' }
     });
 
     const func = new Func({
@@ -33,7 +34,10 @@ describe('mysql', function () {
   });
 
   it('with pool', async function () {
-    const pool = createPool({ user: 'travis' });
+    const pool = createPool({
+      user: 'travis',
+      host: 'mysql'
+    });
     const sql = new Sql({
       name: 'sql',
       adapterType: 'mysql',

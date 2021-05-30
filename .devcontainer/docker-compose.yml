@@ -22,3 +22,6 @@ services:
   mongo:
     image: circleci/mongo
     restart: always
+  mysql:
+    image: circleci/mysql
+    restart: always
