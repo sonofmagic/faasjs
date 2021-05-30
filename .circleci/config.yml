@@ -18,6 +18,8 @@ jobs:
     docker:
       - image: cimg/node:15.1
       - image: circleci/postgres
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
       - image: circleci/redis
       - image: circleci/mongo
     # Then run your tests!

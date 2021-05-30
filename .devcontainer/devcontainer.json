@@ -1,0 +1,18 @@
+{
+	"name": "dev",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/root/app",
+	"extensions": [
+		"ms-azuretools.vscode-docker",
+		"dbaeumer.vscode-eslint",
+		"eamodio.gitlens",
+		"yzhang.markdown-all-in-one",
+		"visualstudioexptteam.vscodeintellicode",
+		"streetsidesoftware.code-spell-checker",
+		"kisstkondoros.vscode-gutter-preview"
+	],
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/zsh"
+	}
+}

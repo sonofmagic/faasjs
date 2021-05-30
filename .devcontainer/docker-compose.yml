@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    command: sleep infinity
+    tty: true
+    volumes:
+      - ..:/root/app:delegated
+      - /root/app/node_modules
+      - ~/.ssh:/root/.ssh:delegated
+    depends_on:
+      - pg
+      - redis
+  pg:
+    image: circleci/postgres
+    restart: always
+  redis:
+    image: circleci/redis
+    restart: always
+  mongo:
+    image: circleci/mongo
+    restart: always
