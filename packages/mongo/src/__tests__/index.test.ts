@@ -2,10 +2,10 @@ import { Mongo } from '../index';
 import { Func } from '@faasjs/func';
 
 describe('mongo', function () {
-  it('with filename', async function () {
+  it('with config', async function () {
     const mongo = new Mongo({
       config: {
-        url: 'mongodb://localhost',
+        url: 'mongodb://mongo',
         database: 'test'
       }
     });
@@ -19,5 +19,7 @@ describe('mongo', function () {
     const handler = func.export().handler;
 
     expect(await handler({})).toEqual([]);
+
+    await mongo.quit();
   });
 });

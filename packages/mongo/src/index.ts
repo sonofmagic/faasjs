@@ -76,4 +76,8 @@ export class Mongo implements Plugin {
 
     await next();
   }
+
+  public async quit (): Promise<void> {
+    await this.client.close();
+  }
 }

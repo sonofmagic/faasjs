@@ -7,7 +7,7 @@ describe('redis', function () {
   });
 
   it('config with code', async function () {
-    const redis = new Redis();
+    const redis = new Redis({ config: { host: 'redis' } });
 
     const func = new Func({
       plugins: [redis],
@@ -23,7 +23,7 @@ describe('redis', function () {
   });
 
   it('config with env', async function () {
-    process.env.SECRET_REDIS_HOST = '127.0.0.1';
+    process.env.SECRET_REDIS_HOST = 'redis';
 
     const redis = new Redis();
 
@@ -42,7 +42,7 @@ describe('redis', function () {
 
   it('useRedis', async function () {
     const func = useFunc(function () {
-      const redis1 = useRedis();
+      const redis1 = useRedis({ config: { host: 'redis' } });
       return async function () {
         await redis1.query('set', ['key', 'redis1']);
 
@@ -58,7 +58,7 @@ describe('redis', function () {
 
   it('query error', async function () {
     const func = useFunc(function () {
-      const redis = useRedis();
+      const redis = useRedis({ config: { host: 'redis' } });
       return async function () {
         await redis.query('wrong', []);
       };
