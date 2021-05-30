@@ -17,9 +17,6 @@ jobs:
     # A list of available CircleCI Docker Convenience Images are available here: https://circleci.com/developer/images/image/cimg/node
     docker:
       - image: cimg/node:15.1
-      - image: circleci/postgres
-        environment:
-          POSTGRES_HOST_AUTH_METHOD: trust
       - image: circleci/redis
       - image: circleci/mongo
     # Then run your tests!
@@ -27,11 +24,19 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      # Next, the node orb's install-packages step will install the dependencies from a package.json.
-      # The orb install-packages step will also automatically cache them for faster future runs.
-      # If you are using yarn instead npm, remove the line above and uncomment the two lines below.
       - node/install-packages:
           pkg-manager: yarn
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for redis
+          command: dockerize -wait tcp://localhost:6379 -timeout 1m
+      - run:
+          name: Wait for mongo
+          command: dockerize -wait tcp://localhost:27017 -timeout 1m
       - run:
           name: Run tests
           command: yarn test
