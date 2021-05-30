@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .ts packages/*/src",
-    "test": "lerna bootstrap && lerna run prepack && yarn jest --silent --runInBand --forceExit",
+    "test": "lerna bootstrap && lerna run prepack && yarn jest --silent --runInBand --forceExit --verbose false --reporters=default --reporters=jest-junit --ci",
     "pub": "lerna publish --preid beta --pre-dist-tag beta --registry https://registry.npmjs.org/",
     "pub:retry": "lerna publish from-git --preid beta --pre-dist-tag beta --registry https://registry.npmjs.org/",
     "pub:github": "lerna publish from-package --preid beta --pre-dist-tag beta --registry https://npm.pkg.github.com/",
@@ -17,6 +17,7 @@
     "jest": "*",
     "lerna": "*",
     "ts-jest": "*",
+    "jest-junit": "*",
     "typescript": "*"
   },
   "workspaces": [

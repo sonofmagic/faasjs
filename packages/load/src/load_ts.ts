@@ -1,6 +1,6 @@
 import deepMerge from '@faasjs/deep_merge';
 import { existsSync, readFileSync, unlinkSync } from 'fs';
-import * as rollup from 'rollup';
+import { rollup } from 'rollup';
 import typescript from 'rollup-plugin-typescript2';
 import { Func } from '@faasjs/func';
 import { join } from 'path';
@@ -150,7 +150,7 @@ export default async function loadTs (filename: string, options: {
     onwarn: () => null
   }, options.input || {});
 
-  const bundle = await rollup.rollup(input);
+  const bundle = await rollup(input);
 
   const dependencies = Object.create(null);
 

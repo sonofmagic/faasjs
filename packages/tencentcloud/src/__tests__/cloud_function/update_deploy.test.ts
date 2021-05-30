@@ -1,6 +1,11 @@
 import { join, sep } from 'path';
 import Tencentcloud from '../..';
 
+jest.mock('child_process', function () {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  return { execSync: function () {} };
+});
+
 jest.mock('cos-nodejs-sdk-v5', () => {
   return class Client {
     headBucket (params, callback) {
@@ -113,4 +118,4 @@ test('update deploy', async function () {
   });
 
   expect(true).toBeTruthy();
-}, 10000);
+}, 100000);
